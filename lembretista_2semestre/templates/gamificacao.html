@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gamificação - Lembretista</title>
+<link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>Gamificação</h1>
+        <div>
+            <a class="btn-link" href="/">← Tarefas</a>
+            <button class="btn-pequeno btn-sair" onclick="logout()">Sair</button>
+        </div>
+    </header>
+
+    <nav class="menu">
+        <a href="/">Tarefas</a>
+        <a href="/dashboard">Dashboard</a>
+        <a href="/gamificacao">Gamificação</a>
+    </nav>
+
+    <section class="jogo">
+        <div class="nivel">Nível <strong id="nivel">1</strong></div>
+        <div class="pontos"><strong id="pontos">0</strong> pontos</div>
+        <div class="progresso"><div id="progresso"></div></div>
+        <p id="meta"></p>
+    </section>
+
+    <section class="conquistas">
+        <h2>Conquistas</h2>
+        <div id="listaConquistas"></div>
+    </section>
+</div>
+
+<script>
+async function logout() {
+    await fetch("/api/logout", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({})
+    });
+    location.href = "/";
+}
+
+async function carregarGamificacao() {
+    const r = await fetch("/api/gamificacao");
+    const d = await r.json();
+    if (d.erro) {
+        document.getElementById("meta").textContent = d.erro;
+        return;
+    }
+    document.getElementById("nivel").textContent = d.nivel;
+    document.getElementById("pontos").textContent = d.pontos;
+
+    const percentual = Math.min((d.pontos_nivel / 50) * 100, 100);
+    document.getElementById("progresso").style.width = percentual + "%";
+
+    document.getElementById("meta").textContent =
+        d.pontos_nivel + "/50 pontos para o próximo nível.";
+
+    document.getElementById("listaConquistas").innerHTML =
+        d.conquistas.map(c => `
+            <div class="conquista ${c.liberada ? "liberada" : ""}">
+                <strong>${c.liberada ? "🏆" : "🔒"} ${c.nome}</strong>
+                <span>${c.descricao}</span>
+            </div>
+        `).join("");
+}
+carregarGamificacao();
+</script>
+</body>
+</html>

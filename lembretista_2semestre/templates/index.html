@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lembretista</title>
+<link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+
+<div id="telaAuth" class="container oculto">
+    <div class="auth-box">
+        <h1>LEMBRETISTA</h1>
+        <div class="tabs-auth">
+            <button onclick="mostrarLogin()">Login</button>
+            <button onclick="mostrarCadastro()">Cadastro</button>
+        </div>
+
+        <div id="loginForm">
+            <h2>Entrar</h2>
+            <input id="loginEmail" type="email" placeholder="E-mail">
+            <input id="loginSenha" type="password" placeholder="Senha">
+            <button onclick="login()">Entrar</button>
+        </div>
+
+        <div id="cadastroForm" class="oculto">
+            <h2>Criar conta</h2>
+            <input id="cadNome" placeholder="Nome">
+            <input id="cadEmail" type="email" placeholder="E-mail">
+            <input id="cadSenha" type="password" placeholder="Senha">
+            <button onclick="cadastro()">Cadastrar</button>
+        </div>
+        <p id="mensagem"></p>
+    </div>
+</div>
+
+<div id="telaApp" class="container oculto">
+    <header>
+        <h1>LEMBRETISTA</h1>
+        <div>Olá, <strong id="nomeUsuario"></strong>
+            <button class="btn-pequeno btn-sair" onclick="logout()">Sair</button>
+        </div>
+    </header>
+
+    <nav class="menu">
+        <a href="/">Tarefas</a>
+        <a href="/dashboard">Dashboard</a>
+        <a href="/gamificacao">Gamificação</a>
+    </nav>
+
+    <section class="novo">
+        <h2>Novo lembrete</h2>
+        <input id="titulo" placeholder="O que deseja lembrar?">
+        <textarea id="descricao" placeholder="Descrição (opcional)"></textarea>
+        <div class="data-hora">
+            <input id="data" type="date">
+            <input id="hora" type="time">
+        </div>
+        <button onclick="adicionar()">Adicionar lembrete</button>
+    </section>
+
+    <nav class="menu">
+        <button onclick="mostrarAba('pendentes')">Pendentes <span id="qPendentes">0</span></button>
+        <button onclick="mostrarAba('concluidas')">Concluídas <span id="qConcluidas">0</span></button>
+        <button onclick="mostrarAba('lixeira')">🗑 Lixeira <span id="qLixeira">0</span></button>
+    </nav>
+
+    <main>
+        <section id="pendentes"></section>
+        <section id="concluidas" class="oculto"></section>
+        <section id="lixeira" class="oculto"></section>
+    </main>
+</div>
+
+<script src="/static/js/app.js"></script>
+</body>
+</html>

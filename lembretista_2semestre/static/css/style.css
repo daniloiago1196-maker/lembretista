@@ -1,0 +1,398 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: system-ui, Arial, sans-serif;
+}
+
+body {
+    background: #FFE81A;
+    color: #4A342A;
+    padding: 20px;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: #FFE81A;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.oculto {
+    display: none !important;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #4A342A;
+    color: #F5E6C8;
+    padding: 14px 20px;
+}
+
+header h1 {
+    font-size: 1.4rem;
+    letter-spacing: 1px;
+    color: #F5E6C8;
+}
+
+header > div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.9rem;
+    color: #E8D5B7;
+}
+
+.linha-pontilhada {
+    height: 4px;
+    background-image: repeating-linear-gradient(
+        to right,
+        #4A342A 0,
+        #4A342A 8px,
+        transparent 8px,
+        transparent 16px
+    );
+    margin: 0;
+}
+
+header + .menu::before,
+.menu + .menu::before {
+    content: "";
+    display: block;
+    height: 4px;
+    width: 100%;
+    background-image: repeating-linear-gradient(
+        to right,
+        #4A342A 0,
+        #4A342A 8px,
+        transparent 8px,
+        transparent 16px
+    );
+}
+
+button {
+    padding: 8px 14px;
+    border: none;
+    border-radius: 6px;
+    background: #4A342A;
+    color: #F5E6C8;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+button:hover {
+    background: #6b4d3d;
+}
+
+.btn-link {
+    color: #F5E6C8;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 6px 10px;
+}
+
+.btn-sair {
+    background: #c0392b;
+    color: #fff;
+}
+
+.btn-sair:hover {
+    background: #a93226;
+}
+
+.menu {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    background: #4A342A;
+    padding: 10px 20px;
+}
+
+.menu a, .menu button {
+    padding: 8px 14px;
+    border-radius: 6px;
+    background: #5a3e1a;
+    color: #F5E6C8;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.85rem;
+    border: 1px solid #6b4d3d;
+}
+
+.menu a:hover, .menu button:hover {
+    background: #6b4d3d;
+}
+
+#telaApp, #telaAuth {
+    background: #FFE81A;
+    padding: 24px;
+}
+
+#telaAuth {
+    padding: 40px 24px;
+}
+
+.auth-box {
+    background: #FFFDE7;
+    padding: 24px;
+    border-radius: 10px;
+    max-width: 380px;
+    margin: 20px auto;
+    border: 2px solid #4A342A;
+}
+
+.auth-box h1 {
+    color: #4A342A;
+    text-align: center;
+    font-size: 1.6rem;
+    margin-bottom: 16px;
+    letter-spacing: 1px;
+}
+
+.tabs-auth {
+    display: flex;
+    gap: 8px;
+    margin: 16px 0;
+}
+
+.tabs-auth button {
+    flex: 1;
+    background: #E8D5B7;
+    color: #4A342A;
+}
+
+.tabs-auth button:hover {
+    background: #4A342A;
+    color: #F5E6C8;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #4A342A;
+    border-radius: 6px;
+    margin-bottom: 10px;
+    font-size: 0.95rem;
+    background: #fff;
+    color: #4A342A;
+}
+
+input:focus, textarea:focus {
+    outline: none;
+    border-color: #6b4d3d;
+}
+
+textarea {
+    min-height: 70px;
+    resize: vertical;
+}
+
+.data-hora {
+    display: flex;
+    gap: 8px;
+}
+
+.novo, .grafico, .jogo, .conquistas {
+    background: #FFFDE7;
+    padding: 16px;
+    border-radius: 10px;
+    margin-bottom: 16px;
+    border: 2px solid #4A342A;
+}
+
+.novo h2, .grafico h2, .conquistas h2 {
+    font-size: 1.05rem;
+    margin-bottom: 12px;
+    color: #4A342A;
+}
+
+.tarefa {
+    background: #FFFDE7;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    border-left: 4px solid #4A342A;
+}
+
+.tarefa.concluida {
+    border-left-color: #10b981;
+    opacity: 0.85;
+}
+
+.tarefa.lixeira {
+    border-left-color: #9ca3af;
+    opacity: 0.7;
+}
+
+.tarefa h3 {
+    font-size: 1rem;
+    margin-bottom: 4px;
+    color: #4A342A;
+}
+
+.tarefa p {
+    font-size: 0.9rem;
+    margin-bottom: 4px;
+    color: #4A342A;
+}
+
+.tarefa small {
+    color: #6b4d3d;
+    font-size: 0.8rem;
+}
+
+.acoes {
+    margin-top: 8px;
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.acoes button {
+    padding: 6px 10px;
+    font-size: 0.8rem;
+}
+
+.vazio {
+    text-align: center;
+    color: #6b4d3d;
+    padding: 20px;
+    font-style: italic;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.card {
+    background: #FFFDE7;
+    padding: 16px;
+    border-radius: 10px;
+    text-align: center;
+    border: 2px solid #4A342A;
+}
+
+.card strong {
+    display: block;
+    font-size: 1.6rem;
+    color: #4A342A;
+}
+
+.card span {
+    color: #6b4d3d;
+    font-size: 0.85rem;
+}
+
+.barras > div {
+    margin-bottom: 10px;
+}
+
+.barras span {
+    font-size: 0.85rem;
+    color: #4A342A;
+}
+
+.barra {
+    background: #E8D5B7;
+    border-radius: 6px;
+    height: 18px;
+    overflow: hidden;
+    margin-top: 4px;
+}
+
+.barra i {
+    display: block;
+    height: 100%;
+    background: #4A342A;
+    width: 0;
+    transition: width 0.4s;
+}
+
+.jogo {
+    text-align: center;
+}
+
+.nivel {
+    font-size: 1.2rem;
+    margin-bottom: 6px;
+    color: #4A342A;
+}
+
+.pontos {
+    font-size: 1.1rem;
+    color: #4A342A;
+    margin-bottom: 12px;
+}
+
+.progresso {
+    background: #E8D5B7;
+    border-radius: 8px;
+    height: 20px;
+    overflow: hidden;
+    margin-bottom: 8px;
+}
+
+.progresso div {
+    height: 100%;
+    width: 0;
+    background: linear-gradient(90deg, #f59e0b, #10b981);
+    transition: width 0.4s;
+}
+
+.conquista {
+    padding: 10px;
+    border-radius: 8px;
+    background: #F5F0DC;
+    margin-bottom: 8px;
+}
+
+.conquista.liberada {
+    background: #ecfdf5;
+    border-left: 4px solid #10b981;
+}
+
+.conquista span {
+    display: block;
+    font-size: 0.85rem;
+    color: #6b4d3d;
+}
+
+.aviso {
+    background: #FFFDE7;
+    color: #4A342A;
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    display: none;
+    font-weight: 600;
+    border: 2px solid #4A342A;
+}
+
+.aviso:not(:empty) {
+    display: block;
+}
+
+@media (max-width: 600px) {
+    body {
+        padding: 10px;
+    }
+    header {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+    .data-hora {
+        flex-direction: column;
+    }
+    .cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}

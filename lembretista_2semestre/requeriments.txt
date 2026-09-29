@@ -1,0 +1,2 @@
+1 python app.py
+2 Acesse: http://localhost:8000

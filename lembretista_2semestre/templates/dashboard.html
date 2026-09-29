@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard - Lembretista</title>
+<link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>Dashboard</h1>
+        <div>
+            <a class="btn-link" href="/">← Tarefas</a>
+            <button class="btn-pequeno btn-sair" onclick="logout()">Sair</button>
+        </div>
+    </header>
+
+    <nav class="menu">
+        <a href="/">Tarefas</a>
+        <a href="/dashboard">Dashboard</a>
+        <a href="/gamificacao">Gamificação</a>
+    </nav>
+
+    <div id="dashboardAviso" class="aviso"></div>
+
+    <div class="cards">
+        <div class="card"><strong id="total">0</strong><span>Total</span></div>
+        <div class="card"><strong id="pendentes">0</strong><span>Pendentes</span></div>
+        <div class="card"><strong id="concluidas">0</strong><span>Concluídas</span></div>
+        <div class="card"><strong id="lixeira">0</strong><span>Na lixeira</span></div>
+    </div>
+
+    <section class="grafico">
+        <h2>Visão das tarefas</h2>
+        <div class="barras">
+            <div><span>Pendentes</span><div class="barra"><i id="barraPendentes"></i></div></div>
+            <div><span>Concluídas</span><div class="barra"><i id="barraConcluidas"></i></div></div>
+            <div><span>Lixeira</span><div class="barra"><i id="barraLixeira"></i></div></div>
+        </div>
+    </section>
+
+    <section class="grafico">
+        <h2>Resumo</h2>
+        <p id="resumo"></p>
+    </section>
+</div>
+
+<script>
+async function logout() {
+    await fetch("/api/logout", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({})
+    });
+    location.href = "/";
+}
+
+async function carregarDashboard() {
+    const r = await fetch("/api/dashboard");
+    const d = await r.json();
+    if (d.erro) {
+        document.getElementById("dashboardAviso").textContent = d.erro;
+        return;
+    }
+    document.getElementById("total").textContent = d.total;
+    document.getElementById("pendentes").textContent = d.pendentes;
+    document.getElementById("concluidas").textContent = d.concluidas;
+    document.getElementById("lixeira").textContent = d.lixeira;
+
+    const max = Math.max(d.pendentes, d.concluidas, d.lixeira, 1);
+    document.getElementById("barraPendentes").style.width  = (d.pendentes  / max * 100) + "%";
+    document.getElementById("barraConcluidas").style.width = (d.concluidas / max * 100) + "%";
+    document.getElementById("barraLixeira").style.width    = (d.lixeira    / max * 100) + "%";
+
+    let percentual = d.total ? Math.round(d.concluidas / d.total * 100) : 0;
+    document.getElementById("resumo").textContent =
+        "Você concluiu " + percentual + "% das suas tarefas.";
+}
+carregarDashboard();
+</script>
+</body>
+</html>
